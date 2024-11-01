@@ -51,12 +51,53 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // GetMessage
     // 메세지큐에서 메세지 확인될때까지 대기
     // msg.message == WM_QUIT인 경우 false를 반환 -> 프로그램 종료
-    while (GetMessage(&msg, nullptr, 0, 0))
+
+    // PeekMessage
+    // 메세지 유무와 관계없이 반환
+    // 메세지큐에서 메세지를 확인한 경우 true, 메세지큐에 메세지가 없는 경우 false
+
+    DWORD dwPrevCount = GetTickCount();
+    DWORD dwAccCount = 0;
+
+
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            int iTime = GetTickCount();
+            if (WM_QUIT == msg.message)
+                break;
+
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+
+            int iAdd = (GetTickCount() - iTime);
+            dwAccCount += iAdd;
+        }
+
+        // 메세지가 발생하지 않는 대부분의 시간
+        else
+        {
+            // 메세지가 없는동안 호출
+            DWORD dwCurCount = GetTickCount();
+            if (dwCurCount - dwPrevCount > 1000)
+            {
+                float fRatio = (float)dwAccCount / 1000.f;
+
+                wchar_t szBuff[50] = {};
+                swprintf_s(szBuff, L"비율 : %f", fRatio);
+                SetWindowText(g_hWnd, szBuff);
+
+                dwPrevCount = dwCurCount;
+                dwAccCount = 0;
+            }
+
+            // Game 코드 수행
+            // 디자인 패턴(설계 유형)
+            // 싱글톤 패턴
         }
     }
 
