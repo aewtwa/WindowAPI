@@ -1,8 +1,10 @@
 ﻿// Client.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
-
+#include "pch.h"
 #include "framework.h"
 #include "Client.h"
+
+#include "CCore.h"
 
 #define MAX_LOADSTRING 100
 
@@ -18,6 +20,38 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
+// 지역
+// 전역
+// 정적 (데이터 영역)
+// 1. 함수 안에 -> 함수 안에서만 존재한다
+// 2. 파일 -> 다른 파일에 같은 이름의 정적변수가 있어도 오류가 발생하지 않는다
+// 3. 클래스 안에
+// 외부
+
+class CClass
+{
+private:
+    int m_i;
+    
+    static int m_iStatic; // 정적 멤버 (데이터 영역)
+
+public:
+    void func()
+    {
+        this->m_i;
+    }
+
+    // 정적 멤버함수, 객체없이 호출 가능, this가 없다(멤버 접근 불가), 정적 멤버는 접근 가능
+    static void FUNC()
+    {
+
+    }
+};
+
+// 정적 멤버는 반드시 초기화를 해줘야한다.
+int CClass::m_iStatic = 0;
+
+// SAL
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
@@ -41,12 +75,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
+    // Core 초기화
+    if (FAILED(CCore::GetInst()->init(g_hWnd, POINT{1280, 768})))
+    {
+        MessageBox(nullptr, L"Core 객체 초기화 실패", L"ERROR", MB_OK);
+
+        return FALSE;
+    }
+
     // 단축키 테이블 정보 로딩
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CLIENT));
 
     MSG msg;
-
-    //SetTimer(g_hWnd, 0, 0, nullptr);
 
     // GetMessage
     // 메세지큐에서 메세지 확인될때까지 대기
@@ -56,15 +96,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 메세지 유무와 관계없이 반환
     // 메세지큐에서 메세지를 확인한 경우 true, 메세지큐에 메세지가 없는 경우 false
 
-    DWORD dwPrevCount = GetTickCount();
-    DWORD dwAccCount = 0;
-
-
     while (true)
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            int iTime = GetTickCount();
             if (WM_QUIT == msg.message)
                 break;
 
@@ -73,35 +108,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
             }
-
-            int iAdd = (GetTickCount() - iTime);
-            dwAccCount += iAdd;
         }
 
         // 메세지가 발생하지 않는 대부분의 시간
         else
         {
-            // 메세지가 없는동안 호출
-            DWORD dwCurCount = GetTickCount();
-            if (dwCurCount - dwPrevCount > 1000)
-            {
-                float fRatio = (float)dwAccCount / 1000.f;
-
-                wchar_t szBuff[50] = {};
-                swprintf_s(szBuff, L"비율 : %f", fRatio);
-                SetWindowText(g_hWnd, szBuff);
-
-                dwPrevCount = dwCurCount;
-                dwAccCount = 0;
-            }
-
             // Game 코드 수행
             // 디자인 패턴(설계 유형)
             // 싱글톤 패턴
+            CCore::GetInst()->progress();
         }
     }
-
-    //KillTimer(g_hWnd, 0);
 
     return (int) msg.wParam;
 }
