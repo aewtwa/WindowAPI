@@ -2,8 +2,8 @@
 #include "CObject.h"
 
 CObject::CObject()
-	: m_ptPOS{}
-	, m_ptScale{}
+	: m_vPos{}
+	, m_vScale{}
 {
 }
 
