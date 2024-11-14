@@ -24,7 +24,7 @@ CKeyMgr::~CKeyMgr()
 
 void CKeyMgr::init()
 {
-	for (int i = 0; i < (int)KEY::LAST; i++)
+	for (int i = 0; i < (int)KEY::LAST; ++i)
 	{
 		m_vecKey.push_back(tKeyInfo{ KEY_STATE::NONE, false });
 	}
@@ -39,7 +39,7 @@ void CKeyMgr::update()
 	// 윈도우 포커싱 중일 때 키 이벤트 동작
 	if (nullptr != hWnd)
 	{
-		for (int i = 0; i < (int)KEY::LAST; i++)
+		for (int i = 0; i < (int)KEY::LAST; ++i)
 		{
 			if (GetAsyncKeyState(g_arrVK[i]) & 0x8000)
 			{
@@ -77,7 +77,7 @@ void CKeyMgr::update()
 	// 윈도우 포커싱 해제상태
 	else
 	{
-		for (int i = 0; i < (int)KEY::LAST; i++)
+		for (int i = 0; i < (int)KEY::LAST; ++i)
 		{
 			m_vecKey[i].bPrevPush = false;
 
