@@ -2,6 +2,10 @@
 #include "CScene_Start.h"
 
 #include "CObject.h"
+#include "CPlayer.h"
+#include "CMonster.h"
+
+#include "CCore.h"
 
 CScene_Start::CScene_Start()
 {
@@ -13,13 +17,24 @@ CScene_Start::~CScene_Start()
 
 void CScene_Start::Enter()
 {
-	// Object 추가
-	CObject* pObj = new CObject;
+	// Player Object 추가
+	CObject* pPlayerObj = new CPlayer;
+	pPlayerObj->SetPos(Vec2(640.f, 384.f));
+	pPlayerObj->SetScale(Vec2(100.f, 100.f));
+	AddObject(pPlayerObj, GROUP_TYPE::DEFAULT);
 
-	pObj->SetPos(Vec2(640.f, 384.f));
-	pObj->SetScale(Vec2(100.f, 100.f));
+	// Monster Object 추가
+	Vec2 vResolution = CCore::GetInst()->GetResolution();
 
-	AddObject(pObj, GROUP_TYPE::DEFAULT);
+	CMonster* pMonsterObj = nullptr;
+	for (int  i = 0; i < 5; ++i)
+	{
+		pMonsterObj = new CMonster;
+		pMonsterObj->SetPos(Vec2(300.f + 100.f * i, 50.f));
+		pMonsterObj->SetScale(Vec2(50.f, 50.f));
+		pMonsterObj->SetCenterPos(Vec2(300.f + 100.f * i, 50.f));
+		AddObject(pMonsterObj, GROUP_TYPE::DEFAULT);
+	}
 }
 void CScene_Start::Exit()
 {
