@@ -1,11 +1,15 @@
 #include "pch.h"
 #include "CScene_Start.h"
 
+#include "CPathMgr.h"
+
 #include "CObject.h"
 #include "CPlayer.h"
 #include "CMonster.h"
 
 #include "CCore.h"
+
+#include "CTexture.h"
 
 CScene_Start::CScene_Start()
 {

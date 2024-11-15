@@ -53,9 +53,7 @@ public:
 	void progress();
 
 	HWND GetMainHwnd() { return m_hWnd; }
+	HDC GetMainDC() { return m_hDC; }
 	POINT GetResolution() { return m_ptResolution; }
-
 private:
-	void update();
-	void render();
 };
