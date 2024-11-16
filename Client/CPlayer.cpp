@@ -7,7 +7,7 @@
 #include "CTimeMgr.h"
 #include "CSceneMgr.h"
 #include "CPathMgr.h"
-
+#include "CResMgr.h"
 #include "CTexture.h"
 #include "CMonster.h"
 
@@ -15,36 +15,32 @@ CPlayer::CPlayer()
 	: m_pTex(nullptr)
 {
 	// Texture 로딩하기
-	m_pTex = new CTexture;
+	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");
 
-	wstring strFilepath = CPathMgr::GetInst()->GetContentPath();
-	strFilepath += L"texture\\Player.bmp";
-	m_pTex->Load(strFilepath);
+	CreateCollider();
 }
 
 CPlayer::~CPlayer()
 {
-	if (nullptr != m_pTex)
-		delete m_pTex;
 }
 
 void CPlayer::update()
 {
 	Vec2 vPos = GetPos();
 
-	if (KEY_HOLD(KEY::W))
+	if (KEY_HOLD(KEY::UP))
 	{
 		vPos.y -= 200.f * fDT;
 	}
-	if (KEY_HOLD(KEY::S))
+	if (KEY_HOLD(KEY::DOWN))
 	{
 		vPos.y += 200.f * fDT;
 	}
-	if (KEY_HOLD(KEY::A))
+	if (KEY_HOLD(KEY::LEFT))
 	{
 		vPos.x -= 200.f * fDT;
 	}
-	if (KEY_HOLD(KEY::D))
+	if (KEY_HOLD(KEY::RIGHT))
 	{
 		vPos.x += 200.f * fDT;
 	}

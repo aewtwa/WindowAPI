@@ -20,6 +20,7 @@ public:
 	virtual ~CScene();
 
 	void update();
+	void finalupdate();
 	void render(HDC _dc);
 
 	void SetName(const wstring& _strName) { m_strName = _strName; }
