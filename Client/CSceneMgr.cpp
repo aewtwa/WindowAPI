@@ -5,7 +5,7 @@
 
 CSceneMgr::CSceneMgr()
 	: m_arrScene{}
-	, m_pCurCene(nullptr)
+	, m_pCurScene(nullptr)
 {
 
 }
@@ -27,16 +27,18 @@ void CSceneMgr::init()
 	m_arrScene[(UINT)SCENE_TYPE::START]->SetName(L"Start_Scene");
 
 	// ÇöÀç ¾À ¼³Á¤
-	m_pCurCene = m_arrScene[(UINT)SCENE_TYPE::START];
-	m_pCurCene->Enter();
+	m_pCurScene = m_arrScene[(UINT)SCENE_TYPE::START];
+	m_pCurScene->Enter();
 }
 
 void CSceneMgr::update()
 {
-	m_pCurCene->update();
+	m_pCurScene->update();
+
+	m_pCurScene->finalupdate();
 }
 
 void CSceneMgr::render(HDC _dc)
 {
-	m_pCurCene->render(_dc);
+	m_pCurScene->render(_dc);
 }
