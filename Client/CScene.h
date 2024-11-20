@@ -28,5 +28,7 @@ public:
 
 	virtual void Enter() = 0; // 해당 Scene에 진입 시 호출
 	virtual void Exit() = 0;  // 해당 Scene을 탈출 시 호출
+
+	const vector<CObject*>& GetGroupObject(GROUP_TYPE _eType) { return m_arrObj[(UINT)_eType]; }
 };
 
