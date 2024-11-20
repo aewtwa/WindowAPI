@@ -3,6 +3,7 @@
 
 #include "CTimeMgr.h"
 #include "CCollider.h"
+#include "CPlayer.h"
 
 CMonster::CMonster()
 	: m_vCenterPos(Vec2(0.f,0.f))
@@ -31,4 +32,21 @@ void CMonster::update()
 		vCurPos.x += fDist * m_iDir;
 	}
 	SetPos(vCurPos);
+}
+
+void CMonster::OnCollision(CCollider* _pOther)
+{
+}
+
+void CMonster::OnCollisionEnter(CCollider* _pOther)
+{
+	CObject* pOtherObj = _pOther->GetObj();
+	if (pOtherObj->GetName() == L"Player")
+	{
+		int a = 0;
+	}
+}
+
+void CMonster::OnCollisionExit(CCollider* _pOther)
+{
 }

@@ -15,6 +15,7 @@
 CPlayer::CPlayer()
 	: m_pTex(nullptr)
 {
+	SetName(L"Player");
 	// Texture 로딩하기
 	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");
 
@@ -56,8 +57,7 @@ void CPlayer::update()
 		Monster->SetScale(Vec2(50.f, 50.f));
 		Monster->SetCenterPos(vMonsterPos);
 
-		CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
-		pCurScene->AddObject(Monster, GROUP_TYPE::DEFAULT);
+		CreateObject(Monster, GROUP_TYPE::MONSTER);
 	}
 
 
