@@ -11,6 +11,8 @@
 
 #include "CTexture.h"
 #include "CCollisionMgr.h"
+#include "CSceneMgr.h"
+#include "CKeyMgr.h"
 
 CScene_Start::CScene_Start()
 {
@@ -18,6 +20,16 @@ CScene_Start::CScene_Start()
 
 CScene_Start::~CScene_Start()
 {
+}
+
+void CScene_Start::update()
+{
+	CScene::update();
+
+	if (KEY_TAP(KEY::ENTER))
+	{
+		ChangeScene(SCENE_TYPE::TOOL);
+	}
 }
 
 void CScene_Start::Enter()
@@ -45,7 +57,10 @@ void CScene_Start::Enter()
 	// PLAYER그룹과 MONSTER그룹 간의 충돌체크
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::MONSTER);
 }
+
 void CScene_Start::Exit()
 {
+	DeleteAll();
+
 	CCollisionMgr::GetInst()->Reset();
 }
