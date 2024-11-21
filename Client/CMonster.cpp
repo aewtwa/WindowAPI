@@ -34,6 +34,10 @@ void CMonster::update()
 	SetPos(vCurPos);
 }
 
+void CMonster::render()
+{
+}
+
 void CMonster::OnCollision(CCollider* _pOther)
 {
 }
@@ -43,7 +47,7 @@ void CMonster::OnCollisionEnter(CCollider* _pOther)
 	CObject* pOtherObj = _pOther->GetObj();
 	if (pOtherObj->GetName() == L"Player")
 	{
-		int a = 0;
+		DeleteObject(this);
 	}
 }
 

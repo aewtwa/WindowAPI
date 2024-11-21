@@ -15,6 +15,7 @@ public:
     ~CMonster();
 
     virtual void update();
+    virtual void render();
 
     float GetSpeed() { return m_fSpeed; }
 

@@ -32,7 +32,7 @@ void CScene_Start::Enter()
 	Vec2 vResolution = CCore::GetInst()->GetResolution();
 
 	CMonster* pMonsterObj = nullptr;
-	for (int  i = 0; i < 5; ++i)
+	for (int i = 0; i < 5; ++i)
 	{
 		pMonsterObj = new CMonster;
 		pMonsterObj->SetPos(Vec2(300.f + 100.f * i, 50.f));

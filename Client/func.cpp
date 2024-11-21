@@ -12,3 +12,12 @@ void CreateObject(CObject* _pObj, GROUP_TYPE _eGroup)
 
 	CEventMgr::GetInst()->AddEvent(event);
 }
+
+void DeleteObject(CObject* _pObj)
+{
+	tEvent event = {};
+	event.eEvent = EVENT_TYPE::DELETE_OBJECT;
+	event.lParam = (DWORD_PTR)_pObj;
+
+	CEventMgr::GetInst()->AddEvent(event);
+}
