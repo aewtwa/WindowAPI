@@ -40,6 +40,11 @@ void CScene_Start::Enter()
 	pPlayerObj->SetScale(Vec2(100.f, 100.f));
 	AddObject(pPlayerObj, GROUP_TYPE::PLAYER);
 
+	// 복제Player Object 추가
+	CObject* pOtherPlayer = pPlayerObj->Clone();
+	pOtherPlayer->SetPos(Vec2(840.f, 384.f));
+	AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
+
 	// Monster Object 추가
 	Vec2 vResolution = CCore::GetInst()->GetResolution();
 
@@ -56,6 +61,7 @@ void CScene_Start::Enter()
 	// 충돌 지정
 	// PLAYER그룹과 MONSTER그룹 간의 충돌체크
 	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::PLAYER, GROUP_TYPE::MONSTER);
+	CCollisionMgr::GetInst()->CheckGroup(GROUP_TYPE::MONSTER, GROUP_TYPE::PROJ_PLAYER);
 }
 
 void CScene_Start::Exit()

@@ -74,6 +74,9 @@
     <Filter Include="Engine\03. Manager\EventMgr">
       <UniqueIdentifier>{43024f5b-632b-443d-928d-d293291d459e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04. Object\Missile">
+      <UniqueIdentifier>{1429c68b-6afc-4926-b69b-0d3f6bdbe1a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h">
@@ -155,6 +158,9 @@
     <ClInclude Include="CScene_Tool.h">
       <Filter>Engine\05. Scene\Scene_Tool</Filter>
     </ClInclude>
+    <ClInclude Include="CMissile.h">
+      <Filter>Engine\04. Object\Missile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -230,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="CScene_Tool.cpp">
       <Filter>Engine\05. Scene\Scene_Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissile.cpp">
+      <Filter>Engine\04. Object\Missile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

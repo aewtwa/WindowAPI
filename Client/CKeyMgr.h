@@ -21,6 +21,7 @@ enum class KEY
 	A,S,D,F,G,H,J,K,L,
 	Z,X,C,V,B,N,M,
 	ALT,CTRL,LSHIFT,SPACE,ENTER,ESC,
+	LClick,RClick,
 
 	LAST,
 };

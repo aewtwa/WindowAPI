@@ -15,8 +15,10 @@ private:
 
 public:
 	CObject();
+	CObject(const CObject& _origin);
 	virtual ~CObject();
 
+	virtual CObject* Clone() = 0;
 	virtual void update() = 0;
 	virtual void finalupdate() final;
 	virtual void render(HDC _dc);

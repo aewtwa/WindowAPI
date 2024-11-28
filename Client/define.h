@@ -14,11 +14,15 @@
 #define fDT CTimeMgr::GetInst()->GetfDT()
 #define DT CTimeMgr::GetInst()->GetDT()
 
+#define CLONE(type) type* Clone() {return new type(*this);}
+
 #define KEY_CHECK(key, state) CKeyMgr::GetInst()->GetKeyState(key) == state
 #define KEY_HOLD(key) KEY_CHECK(key, KEY_STATE::HOLD)
 #define KEY_TAP(key) KEY_CHECK(key, KEY_STATE::TAP)
 #define KEY_AWAY(key) KEY_CHECK(key, KEY_STATE::AWAY)
 #define KEY_NONE(key) KEY_CHECK(key, KEY_STATE::NONE)
+
+#define PI 3.14159265359f
 
 enum class GROUP_TYPE
 {

@@ -2,7 +2,7 @@
 #include "CPlayer.h"
 
 #include "CScene.h"
-
+#include "CMissile.h"
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
 #include "CSceneMgr.h"
@@ -31,33 +31,25 @@ void CPlayer::update()
 {
 	Vec2 vPos = GetPos();
 
-	if (KEY_HOLD(KEY::UP))
+	if (KEY_HOLD(KEY::W))
 	{
 		vPos.y -= 200.f * fDT;
 	}
-	if (KEY_HOLD(KEY::DOWN))
+	if (KEY_HOLD(KEY::S))
 	{
 		vPos.y += 200.f * fDT;
 	}
-	if (KEY_HOLD(KEY::LEFT))
+	if (KEY_HOLD(KEY::A))
 	{
 		vPos.x -= 200.f * fDT;
 	}
-	if (KEY_HOLD(KEY::RIGHT))
+	if (KEY_HOLD(KEY::D))
 	{
 		vPos.x += 200.f * fDT;
 	}
-	if (KEY_TAP(KEY::SPACE))
+	if (KEY_TAP(KEY::LClick))
 	{
-		Vec2 vMonsterPos = GetPos();
-		vMonsterPos.y -= GetScale().y / 2.f;
-
-		CMonster* Monster = new CMonster;
-		Monster->SetPos(vMonsterPos);
-		Monster->SetScale(Vec2(50.f, 50.f));
-		Monster->SetCenterPos(vMonsterPos);
-
-		CreateObject(Monster, GROUP_TYPE::MONSTER);
+		Fire();
 	}
 
 
@@ -81,4 +73,18 @@ void CPlayer::render(HDC _dc)
 
 	// 컴포넌트(충돌체, etc...)가 있는 경우 렌더 
 	component_render(_dc);
+}
+
+void CPlayer::Fire()
+{
+	Vec2 vMissilePos = GetPos();
+	vMissilePos.y -= GetScale().y / 2.f;
+
+	// Missile Object
+	CMissile* Missile = new CMissile;
+	Missile->SetPos(vMissilePos);
+	Missile->SetScale(Vec2(50.f, 50.f));
+	Missile->SetDir(Vec2(-1.f,-7.f));
+
+	CreateObject(Missile, GROUP_TYPE::PROJ_PLAYER);
 }

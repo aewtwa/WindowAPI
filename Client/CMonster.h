@@ -1,6 +1,8 @@
 #pragma once
 #include "CObject.h"
 
+class CTexture;
+
 class CMonster :
     public CObject
 {
@@ -9,13 +11,15 @@ private:
     float       m_fSpeed;
     float       m_fMaxDistance;
     int         m_iDir; // 1, -1
+    CTexture*   m_pTex;
 
 public:
     CMonster();
     ~CMonster();
 
+    CLONE(CMonster);
     virtual void update();
-    virtual void render();
+    virtual void render(HDC _dc);
 
     float GetSpeed() { return m_fSpeed; }
 
