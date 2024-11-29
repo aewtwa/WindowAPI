@@ -18,7 +18,7 @@ public:
 	void update();
 	void render(HDC _dc);
 
-	void CreateAnimation(CTexture* _pTex, Vec2 _vLT, );
+	void CreateAnimation(const wstring& _strName, CTexture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, UINT _iFrameCount);
 	void FindAnimation();
 	void Play();
 

@@ -2,6 +2,7 @@
 #include "CAnimation.h"
 
 CAnimation::CAnimation()
+	: m_pAnimator(nullptr)
 {
 
 }

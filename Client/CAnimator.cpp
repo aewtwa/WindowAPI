@@ -26,14 +26,12 @@ void CAnimator::render(HDC _dc)
 		m_pCurAnim->render(_dc);
 }
 
-void CAnimator::CreateAnimation(CTexture* _pTex)
+void CAnimator::CreateAnimation(const wstring& _strName, CTexture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, UINT _iFrameCount)
 {
-}
+	CAnimation* pAnim = new CAnimation;
+	pAnim->SetName(_strName);
+	pAnim->m_pAnimator = this;
+	pAnim->Create(_pTex, _vLT, _vSliceSize, _vStep, _iFrameCount);
 
-void CAnimator::FindAnimation()
-{
-}
-
-void CAnimator::Play()
-{
+	m_mapAnim.insert(make_pair(_strName, pAnim));
 }

@@ -24,9 +24,9 @@ CPlayer::CPlayer()
 	GetCollider()->SetScale(Vec2(100.f, 100.f));
 
 	// Texture 로딩하기
-	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");
+	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Bazzi\\Bazzi.bmp");
 	CreateAnimator();
-	GetAnimator()->CreateAnimation();
+	GetAnimator()->CreateAnimation(m_pTex, Vec2(0.f, 120.f), Vec2(50.f, 60.f), Vec2(60.f, 0.f), 4);
 }
 
 CPlayer::~CPlayer()
