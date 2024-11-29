@@ -11,16 +11,22 @@
 #include "CTexture.h"
 #include "CMonster.h"
 #include "CCollider.h"
+#include "CAnimator.h"
 
 CPlayer::CPlayer()
 	: m_pTex(nullptr)
 {
-	SetName(L"Player");
 	// Texture 로딩하기
-	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");
+	//m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");
+	SetName(L"Player");
 
 	CreateCollider();
 	GetCollider()->SetScale(Vec2(100.f, 100.f));
+
+	// Texture 로딩하기
+	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");
+	CreateAnimator();
+	GetAnimator()->CreateAnimation();
 }
 
 CPlayer::~CPlayer()
