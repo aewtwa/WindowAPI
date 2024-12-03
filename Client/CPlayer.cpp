@@ -14,7 +14,6 @@
 #include "CAnimator.h"
 
 CPlayer::CPlayer()
-	: m_pTex(nullptr)
 {
 	// Texture 로딩하기
 	//m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");
@@ -24,9 +23,10 @@ CPlayer::CPlayer()
 	GetCollider()->SetScale(Vec2(100.f, 100.f));
 
 	// Texture 로딩하기
-	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Bazzi\\Bazzi.bmp");
+	CTexture* pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Bazzi\\Bazzi.bmp");
 	CreateAnimator();
-	GetAnimator()->CreateAnimation(m_pTex, Vec2(0.f, 120.f), Vec2(50.f, 60.f), Vec2(60.f, 0.f), 4);
+	GetAnimator()->CreateAnimation(L"WALK_DOWN", pTex, Vec2(0.f, 120.f), Vec2(50.f, 60.f), Vec2(50.f, 0.f), 0.1f, 4);
+	GetAnimator()->Play(L"WALK_DOWN", true);
 }
 
 CPlayer::~CPlayer()
@@ -60,24 +60,12 @@ void CPlayer::update()
 
 
 	SetPos(vPos);
+	GetAnimator()->update();
 }
 
 void CPlayer::render(HDC _dc)
 {
-	int iWidth = (int)m_pTex->Width();
-	int iHeight = (int)m_pTex->Height();
-
-	Vec2 vPos = GetPos();
-
-	TransparentBlt(_dc
-		, (int)(vPos.x - (float)(iWidth / 2))
-		, (int)(vPos.y - (float)(iHeight / 2))
-		, iWidth, iHeight
-		, m_pTex->GetDC()
-		, 0, 0, iWidth, iHeight
-		, RGB(255, 0, 255));
-
-	// 컴포넌트(충돌체, etc...)가 있는 경우 렌더 
+	// 컴포넌트(충돌체, etc...)가 있는경우 렌더
 	component_render(_dc);
 }
 

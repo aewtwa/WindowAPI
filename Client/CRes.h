@@ -8,7 +8,7 @@ private:
 
 public:
 	CRes();
-	~CRes();
+	virtual ~CRes();
 
 	const wstring& GetKey() { return m_strKey; }
 	const wstring& GetRelativePath() { return m_strRelativePath; }

@@ -40,10 +40,10 @@ void CScene_Start::Enter()
 	pPlayerObj->SetScale(Vec2(100.f, 100.f));
 	AddObject(pPlayerObj, GROUP_TYPE::PLAYER);
 
-	// 복제Player Object 추가
-	CObject* pOtherPlayer = pPlayerObj->Clone();
-	pOtherPlayer->SetPos(Vec2(840.f, 384.f));
-	AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
+	//// 복제Player Object 추가
+	//CObject* pOtherPlayer = pPlayerObj->Clone();
+	//pOtherPlayer->SetPos(Vec2(840.f, 384.f));
+	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
 
 	// Monster Object 추가
 	Vec2 vResolution = CCore::GetInst()->GetResolution();

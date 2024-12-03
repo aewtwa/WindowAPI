@@ -11,7 +11,7 @@ private:
 
 private:
     CTexture();
-    ~CTexture();
+    virtual ~CTexture();
 
 public:
     void Load(const wstring& _strFilePath);

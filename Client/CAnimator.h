@@ -7,9 +7,10 @@ class CTexture;
 class CAnimator
 {
 private:
-	CObject*					m_pOwner; // Animator 소유 오브젝트
 	map<wstring, CAnimation*>	m_mapAnim; // 모든 Animation
 	CAnimation*					m_pCurAnim; // 현재 재생중인 Animation
+	CObject*					m_pOwner; // Animator 소유 오브젝트
+	bool						m_bRepeat; // 반복재생 여부
 
 public:
 	CAnimator();
@@ -18,9 +19,11 @@ public:
 	void update();
 	void render(HDC _dc);
 
-	void CreateAnimation(const wstring& _strName, CTexture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, UINT _iFrameCount);
-	void FindAnimation();
-	void Play();
+	CObject* GetObj() { return m_pOwner; }
+
+	void CreateAnimation(const wstring& _strName, CTexture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, float _fDuration, UINT _iFrameCount);
+	CAnimation* FindAnimation(const wstring& _strName);
+	void Play(const wstring& _strName, bool _bRepeat);
 
 	friend class CObject;
 };
